@@ -11,3 +11,17 @@ const BookType = new GraphQLObjectType({
     status: {type: GraphQLBoolean}
   })
 })
+
+const RootQuery = new GraphQLObjectType({
+  name: 'RootQueryType',
+  fields: {
+    book: {
+      type: BookType,
+      args: { id: {type: GraphQLString}},
+      resolve(parent, args){
+        // code to fetch db
+        return (loadash.find(books, {id: args.id}))
+      }
+    }
+  }
+})
