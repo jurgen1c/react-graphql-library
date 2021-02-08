@@ -1,5 +1,7 @@
-import {GraphQLObjectType, GraphQLString, GraphQLBoolean, GraphQLSchema} from 'graphql';
-import loadash from 'loadash';
+const graphql = require('graphql');
+const _ = require('lodash');
+
+const { GraphQLObjectType, GraphQLString, GraphQLSchema, GraphQLBoolean } = graphql;
 
 let books = [
   {id: '1', title: 'book1', author: 'James', genre: 'scary', status: false}, 
@@ -32,6 +34,6 @@ const RootQuery = new GraphQLObjectType({
   }
 })
 
-export const schema = new GraphQLSchema({
+module.exports = new GraphQLSchema({
   query: RootQuery
-})
+});
