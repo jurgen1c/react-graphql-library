@@ -1,4 +1,15 @@
-import Book from './Book'
+import Book from './Book';
+import {gql} from 'apollo-boost';
+import {graphql} from 'react-apollo';
+
+const getBooks = gql`
+  {
+    books{
+      title
+      id
+    }
+  }
+`
 
 const BookList = () => {
   return(
@@ -10,4 +21,4 @@ const BookList = () => {
   )
 }
 
-export default BookList;
+export default graphql(getBooks)(BookList);

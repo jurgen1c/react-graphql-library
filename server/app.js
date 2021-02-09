@@ -1,6 +1,7 @@
 const express = require('express');
 const {graphqlHTTP} = require('express-graphql');
 const schema = require('./schema/schema');
+const cors = require('cors');
 const uri = "mongodb+srv://JCG:Jurgen.mongo.1988@library.2w4p3.mongodb.net/graphql-library?retryWrites=true&w=majority";
           //'mongodb+srv://JCG:Jurgen.mongo.1988@library.2txzy.mongodb.net/graphql-library?retryWrites=true&w=majority', 
 //179.50.249.148/32
@@ -15,6 +16,8 @@ try{
   console.log(err)
 }
 const app = express();
+
+app.use(cors());
 
 app.use('/graphql', graphqlHTTP({
   schema,
