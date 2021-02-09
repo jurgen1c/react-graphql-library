@@ -1,4 +1,5 @@
 import BookList from './components/BookList';
+import AddBook from './components/AddBook';
 import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from 'react-apollo';
 
@@ -11,6 +12,7 @@ const App = () => {
     <ApolloProvider client={client}>
       <div className="App">
         <h1>React GraphQL Library</h1>
+        <AddBook />
         <BookList />
       </div>
     </ApolloProvider>
