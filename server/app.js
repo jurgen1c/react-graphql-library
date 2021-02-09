@@ -1,7 +1,19 @@
 const express = require('express');
 const {graphqlHTTP} = require('express-graphql');
 const schema = require('./schema/schema');
+const uri = "mongodb+srv://JCG:Jurgen.mongo.1988@library.2w4p3.mongodb.net/graphql-library?retryWrites=true&w=majority";
+          //'mongodb+srv://JCG:Jurgen.mongo.1988@library.2txzy.mongodb.net/graphql-library?retryWrites=true&w=majority', 
+//179.50.249.148/32
+const mogoose = require('mongoose');
+try{
+  mogoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+  mogoose.connection.once('open', () => {
+    console.log('connection success')
+  }) 
 
+}catch(err){
+  console.log(err)
+}
 const app = express();
 
 app.use('/graphql', graphqlHTTP({
