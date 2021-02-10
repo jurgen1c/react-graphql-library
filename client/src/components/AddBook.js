@@ -5,9 +5,10 @@ import {useState} from 'react';
 const AddBook = (props) => {
 
   const [title, setTitle] = useState('');
-  const [grenre, setGenre] = useState('');
+  const [genre, setGenre] = useState('');
   const [status, setStatus] = useState(false);
   const [auhtorId, setAuthorId] = useState('');
+  const [showForm, setShowForm] = useState(false);
 
   const displayAuthors = () => {
     let data = props.getAuthorsQuery;
@@ -35,25 +36,36 @@ const AddBook = (props) => {
 
   }
 
+  const form = styled.form`
+    display: ${showForm ? 'flex' : 'none'};
+  `
+
   return (
-    <form id='add-book' onSubmit={formSubmit}>
-      <div className="field">
-          <label>Book Title:</label>
-          <input type="text" onChange={(e) => {setTitle(e.target.value)}}/>
-      </div>
-      <div className="field">
-          <label>Genre:</label>
-          <input type="text" />
-      </div>
-      <div className="field">
-          <label>Author:</label>
-          <select>
-              <option>Select author</option>
-              { displayAuthors }
-          </select>
-      </div>
-      <button>+</button>
-    </form>
+    <div>
+      <button className='book-btn' onClick={() => {showForm ? setShowForm(false) : setShowForm(true)}}>Add Book</button>
+      <form id='add-book' onSubmit={formSubmit}>
+        <div className="field">
+            <label>Book Title:</label>
+            <input type="text" onChange={(e) => {setTitle(e.target.value)}}/>
+        </div>
+        <div className="field">
+            <label>Genre:</label>
+            <input type="text" onChange={(e) => { setGenre(e.target.value)}}/>
+        </div>
+        <div className="field">
+            <label>Status:</label>
+            <input type="checkbox" onChange={(e) => {setStatus(e.target.value)}}/>
+        </div>
+        <div className="field">
+            <label>Author:</label>
+            <select onSelect={(e) => {setAuthorId(e.target.value)}}>
+                <option>Select author</option>
+                { displayAuthors }
+            </select>
+        </div>
+        <button type='submit'>+</button>
+      </form>
+    </div>
   )
 }
 
